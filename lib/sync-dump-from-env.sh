@@ -1,5 +1,5 @@
 #!/bin/bash
-#This script syncs the site dump to a specified environment
+#This script syncs the site dump from a specified environment
 
 ENV=$1
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
@@ -9,5 +9,4 @@ eval `$ENVVARS`
 
 
 
-rsync -avz $DUMP_PATH/db.tar.gz $ENV_SSHUSER@$ENV_HOST:$ENV_REPODIR/temp/dumps/db.tar.gz
-
+rsync -avz -e "ssh $ENV_CUSTOM_SSHPORTSTR" --delete $ENV_SSHUSER@$ENV_HOST:$ENV_REPODIR/temp/dumps/db.tar.gz $BASEDIR/temp/dumps/db.tar.gz

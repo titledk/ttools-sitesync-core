@@ -4,9 +4,12 @@
 
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
-MODULEDIR="$BASEDIR/ttools-wordpress-sync";
-WPPATH="$BASEDIR/public/";
+MODULEDIR="$BASEDIR/ttools-serversync";
 IMPORT_PATH="$BASEDIR/temp/dumps";
+
+#getting configuration variables
+VARS="$BASEDIR/ttools-core/lib/vars.sh"
+eval `$VARS`
 
 
 #Getting environment specific vars
@@ -36,5 +39,7 @@ tar -xf db.tar.gz
 
 echo "Importing db...";
 
-cd $WPPATH;
-$ENV_PHPPATH $MODULEDIR/thirdparty/wp-cli.phar db import $IMPORT_PATH/db.sql
+
+#This is handled by each framework module individually
+$BASEDIR/$ServerSync_FrameworkModule/lib/overwrite-current-site.sh $IMPORT_PATH/db.sql $ENV
+
