@@ -33,8 +33,6 @@ echo "Initiating backup before overwriting...";
 $MODULEDIR/lib/dump-current-site.sh backup $ENV;
 
 
-echo "Overwriting site..."
-
 
 cd $IMPORT_PATH;
 
@@ -48,15 +46,16 @@ cd $IMPORT_NAME;
 tar -xf ../$IMPORT_NAME.tar.gz
 
 
-echo "Importing db...";
-DB_FILENAME="$IMPORT_PATH/$IMPORT_NAME/$DUMP_DBNAME";
+echo "Overwriting site..."
+
+DBNAME="$IMPORT_PATH/$IMPORT_NAME/$DUMP_DBNAME";
+FILESDIR="$IMPORT_PATH/$IMPORT_NAME/$DUMP_FILESDIR";
 
 #This is handled by each framework module individually
-$BASEDIR/$ServerSync_FrameworkModule/lib/overwrite-current-site.sh $DB_FILENAME $ENV
+$BASEDIR/$ServerSync_FrameworkModule/lib/overwrite-current-site.sh $DBNAME $FILESDIR $ENV
 
 
-echo "Importing assets...";
-echo "TODO";
+
 
 #Cleaning up
 #deleting import directory so a new can be created for next import
