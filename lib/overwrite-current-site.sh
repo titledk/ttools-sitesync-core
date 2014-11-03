@@ -1,11 +1,19 @@
 #!/bin/bash
-#This script overwrites the current site - but not before taking a backup
+#This script overwrites the current site 
+# - from import.tar.gz - which should have been uploaded
+# - but not before taking a backup
 #Can be called with an environment variable
 
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
 MODULEDIR="$BASEDIR/ttools-sitesync-core";
-IMPORT_PATH="$BASEDIR/temp/dumps";
+
+#sourcing variables
+source $MODULEDIR/lib/vars.sh;
+
+#here import.tar.gz will have been uploaded to
+IMPORT_PATH=$DUMP_PATH_DEFAULT;
+
 
 #getting configuration variables
 VARS="$BASEDIR/ttools-core/lib/vars.sh"
@@ -26,20 +34,26 @@ $MODULEDIR/lib/dump-current-site.sh backup $ENV;
 
 
 echo "Overwriting site..."
-#tar -xf
-
-
 
 
 cd $IMPORT_PATH;
 
-echo "Unpacking db dump...";
+echo "Unpacking dump...";
 
-tar -xf db.tar.gz
+#creating import directory
+mkdir $IMPORT_NAME;
+
+#extracting to "import" directory
+cd $IMPORT_NAME;
+tar -xf ../$IMPORT_NAME.tar.gz
+
 
 echo "Importing db...";
-
+DB_FILENAME="$IMPORT_PATH/$IMPORT_NAME/$DUMP_DBNAME";
 
 #This is handled by each framework module individually
-$BASEDIR/$ServerSync_FrameworkModule/lib/overwrite-current-site.sh $IMPORT_PATH/db.sql $ENV
+$BASEDIR/$ServerSync_FrameworkModule/lib/overwrite-current-site.sh $DB_FILENAME $ENV
 
+
+echo "Importing assets...";
+echo "TODO";

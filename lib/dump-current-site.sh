@@ -1,5 +1,6 @@
 #!/bin/bash
-#This script dumps the current site
+#This script dumps the current site to temp/dumps,
+#and creates a tar file of it
 
 #You need to supply either 'dump' or 'backup' as type
 if [ -z "${1}" ]; then
@@ -11,8 +12,11 @@ DUMPTYPE=$1
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
 MODULEDIR="$BASEDIR/ttools-sitesync-core";
-DUMP_PATH="$BASEDIR/temp/dumps";
-DUMP_DB_NAME="db";
+
+#sourcing variables
+source $MODULEDIR/lib/vars.sh; #$DUMP_PATH_DEFAULT is defined here
+
+DUMP_PATH=$DUMP_PATH_DEFAULT;
 
 
 #getting configuration variables
@@ -31,34 +35,30 @@ eval `$ENVVARS`
 
 #specifics for backup type
 if [[ "$DUMPTYPE" == "backup" ]]; then
-	DUMP_PATH="$BASEDIR/temp/dumps/backups";
-	
+	DUMP_PATH="$BASEDIR/temp/dumps/$BACKUP_NAME";
 	DUMP_NAME=$(date +"%Y-%m-%d_%H-%M%Z");
-	DUMP_DB_NAME="db-$DUMP_NAME";
 fi
 
 
 #making sure dump path exists
-mkdir -p $DUMP_PATH;
+mkdir -p $DUMP_PATH/$DUMP_NAME;
 
 
+echo "Dumping db and assets...";
 
-
-echo "Dumping database...";
-
+DBNAME="$DUMP_PATH/$DUMP_NAME/$DUMP_DBNAME";
+FILESDIR="$DUMP_PATH/$DUMP_NAME/$DUMP_FILESDIR";
 
 #This is handled by each framework module individually
-$BASEDIR/$ServerSync_FrameworkModule/lib/dump-current-site.sh $DUMP_PATH/$DUMP_DB_NAME.sql $ENV
+$BASEDIR/$ServerSync_FrameworkModule/lib/dump-current-site.sh $DBNAME $FILESDIR $ENV
 
 
+echo "...and compressing the dump";
 
-
-echo "...and compressing it";
-
-cd $DUMP_PATH; 
-nice -n 19 tar -zcf $DUMP_DB_NAME.tar.gz $DUMP_DB_NAME.sql;
+cd $DUMP_PATH/$DUMP_NAME; 
+nice -n 19 tar -zcf ../$DUMP_NAME.tar.gz *;
 
 #we don't want to keep all the uncompressed versions for backups
 if [[ "$DUMPTYPE" == "backup" ]]; then
-	rm $DUMP_PATH/$DUMP_DB_NAME.sql
+	rm $DUMP_PATH/$DUMP_NAME
 fi
