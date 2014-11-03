@@ -57,3 +57,12 @@ $BASEDIR/$ServerSync_FrameworkModule/lib/overwrite-current-site.sh $DB_FILENAME 
 
 echo "Importing assets...";
 echo "TODO";
+
+#Cleaning up
+#deleting import directory so a new can be created for next import
+cd ..;
+rm -rf $IMPORT_NAME;
+
+#moving import package to backups
+DATETIME=$(date +"%Y-%m-%d_%H-%M%Z");
+mv $IMPORT_NAME.tar.gz $BACKUP_NAME/$DATETIME-$IMPORT_NAME.tar.gz;

@@ -59,6 +59,7 @@ cd $DUMP_PATH/$DUMP_NAME;
 nice -n 19 tar -zcf ../$DUMP_NAME.tar.gz *;
 
 #we don't want to keep all the uncompressed versions for backups
+#so we'll delete the backup directory, and only keep the tar
 if [[ "$DUMPTYPE" == "backup" ]]; then
-	rm $DUMP_PATH/$DUMP_NAME
+	rm -rf $DUMP_PATH/$DUMP_NAME
 fi
