@@ -10,7 +10,7 @@ fi
 DUMPTYPE=$1
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
-MODULEDIR="$BASEDIR/ttools-server-sync";
+MODULEDIR="$BASEDIR/ttools-sitesync-core";
 DUMP_PATH="$BASEDIR/temp/dumps";
 DUMP_DB_NAME="db";
 

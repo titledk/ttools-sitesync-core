@@ -4,7 +4,7 @@
 
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
-MODULEDIR="$BASEDIR/ttools-serversync";
+MODULEDIR="$BASEDIR/ttools-sitesync-core";
 IMPORT_PATH="$BASEDIR/temp/dumps";
 
 #getting configuration variables

@@ -1,9 +1,20 @@
-# Terminal Tools Server Sync Core
+# Terminal Tools Site Sync Core
 
-This module won't do much on it's own, but needs and additional framework 
-specific module.
+Core for syncing site assets and databases between local development 
+environments to/from (or between) test/stage/live environments
+with [Terminal Tools](https://github.com/titledk/ttools-core)
 
-At the moment we're working on modules for Wordpress and SilverStripe.
+You'll need to add (or write) an additional framework specific module
+to make this work with your framework.
+
+Available modules:
+
+* [Wordpress Site Sync](https://github.com/CPHCloud/ttools-sitesync-wordpress)
+
+
+Under development:
+
+* **SilverStripe Site Sync**
 
 
 
@@ -12,5 +23,5 @@ At the moment we're working on modules for Wordpress and SilverStripe.
 Add the following to your `ttools-config.yml` (setting the framework module you're using):
 
 	ServerSync:
-		FrameworkModule: 'ttools-wordpress-sync'
+		FrameworkModule: 'ttools-sitesync-wordpress'
 
