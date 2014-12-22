@@ -4,9 +4,8 @@ BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
 MODULEDIR="$BASEDIR/ttools-sitesync-core";
 
 
+fileList="$(find $BASEDIR/temp/dumps/backups/* -maxdepth 0 -type d -not -name '.*')"
 
-
-fileList="$(find $BASEDIR/temp/dumps/backups -maxdepth 1 -type f -not -name '.*')"
 
 
 
@@ -30,6 +29,9 @@ do
 
 		if [ $currentDir != "." ] ; then
 		
+		
+			size=$(du -sh $f | cut -f1);
+		
 			firstDir=false
 			prevDir=$currentDir
 
@@ -40,7 +42,7 @@ do
 		
 			
 			#filenamePretty="${str//.sh/}"
-			echo "$i) $str";
+			echo "$i) $str ($size)";
 			#echo "${MENU}${NUMBER} $i)${MENU} $filenamePretty ${NORMAL}"	
 
 
@@ -80,16 +82,14 @@ while [ opt != '' ]
 
 				if (( $i == $opt ))
 				then
-					echo $f;
+					#starting by removing "import" leftover
+					rm -rf $BASEDIR/temp/dumps/import
 					
-					#moving to "latest"
+					#copying
+					#echo copying $f
+					#echo to $BASEDIR/temp/dumps/import/
 					
-					#starting by removing "latest leftovers"
-					#rm -rf $BASEDIR/temp/dumps/latest
-					#rm -rf $BASEDIR/temp/dumps/latest.tar.gz
-					
-					#moving
-					cp $f $BASEDIR/temp/dumps/import.tar.gz
+					cp $f $BASEDIR/temp/dumps/import/
 					
 					#importing
 					$MODULEDIR/lib/overwrite-current-site.sh
