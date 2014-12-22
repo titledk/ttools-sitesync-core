@@ -1,6 +1,5 @@
 #!/bin/bash
 #This script dumps the current site to temp/dumps,
-#and creates a tar file of it
 
 #You need to supply either 'dump' or 'backup' as type
 if [ -z "${1}" ]; then
@@ -53,13 +52,15 @@ FILESDIR="$DUMP_PATH/$DUMP_NAME/$DUMP_FILESDIR";
 $BASEDIR/$ServerSync_FrameworkModule/lib/dump-current-site.sh $DBNAME $FILESDIR $ENV
 
 
-echo "...and compressing the dump";
+#dump compression has been taken out for now
 
-cd $DUMP_PATH/$DUMP_NAME; 
-nice -n 19 tar -zcf ../$DUMP_NAME.tar.gz *;
-
-#we don't want to keep all the uncompressed versions for backups
-#so we'll delete the backup directory, and only keep the tar
-if [[ "$DUMPTYPE" == "backup" ]]; then
-	rm -rf $DUMP_PATH/$DUMP_NAME
-fi
+#echo "...and compressing the dump";
+#
+#cd $DUMP_PATH/$DUMP_NAME; 
+#nice -n 19 tar -zcf ../$DUMP_NAME.tar.gz *;
+#
+##we don't want to keep all the uncompressed versions for backups
+##so we'll delete the backup directory, and only keep the tar
+#if [[ "$DUMPTYPE" == "backup" ]]; then
+#	rm -rf $DUMP_PATH/$DUMP_NAME
+#fi

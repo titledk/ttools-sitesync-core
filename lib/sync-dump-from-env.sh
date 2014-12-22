@@ -11,11 +11,9 @@ source $BASEDIR/ttools-sitesync-core/lib/vars.sh;
 ENVVARS="$BASEDIR/ttools-core/lib/vars-for-env.sh $ENV"
 eval `$ENVVARS`
 
-#will be saved locally as import.tar.gz
-DUMP_TAR_LOCAL="$DUMP_PATH_DEFAULT/$IMPORT_NAME.tar.gz";
+DUMP_LOCAL="$DUMP_PATH_DEFAULT/$IMPORT_NAME";
 
-#synced from latest.tar.gz
-DUMP_TAR_SERVER="$ENV_REPODIR/$DUMP_PATH_DEFAULT_REL/$DUMP_NAME.tar.gz";
+DUMP_SERVER="$ENV_REPODIR/$DUMP_PATH_DEFAULT_REL/$DUMP_NAME";
 
 
-rsync -avz -e "ssh $ENV_CUSTOM_SSHPORTSTR" --delete $ENV_SSHUSER@$ENV_HOST:$DUMP_TAR_SERVER $DUMP_TAR_LOCAL
+rsync -avz -e "ssh $ENV_CUSTOM_SSHPORTSTR" --delete $ENV_SSHUSER@$ENV_HOST:$DUMP_SERVER $DUMP_LOCAL

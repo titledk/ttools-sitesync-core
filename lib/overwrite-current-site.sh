@@ -1,6 +1,6 @@
 #!/bin/bash
 #This script overwrites the current site 
-# - from import.tar.gz - which should have been uploaded
+# - from the import directory - which should have been uploaded
 # - but not before taking a backup
 #Can be called with an environment variable
 
@@ -11,7 +11,7 @@ MODULEDIR="$BASEDIR/ttools-sitesync-core";
 #sourcing variables
 source $MODULEDIR/lib/vars.sh;
 
-#here import.tar.gz will have been uploaded to
+#here the import dir will have been synced to
 IMPORT_PATH=$DUMP_PATH_DEFAULT;
 
 
@@ -36,14 +36,15 @@ $MODULEDIR/lib/dump-current-site.sh backup $ENV;
 
 cd $IMPORT_PATH;
 
-echo "Unpacking dump...";
 
-#creating import directory
-mkdir $IMPORT_NAME;
-
-#extracting to "import" directory
-cd $IMPORT_NAME;
-tar -xf ../$IMPORT_NAME.tar.gz
+#echo "Unpacking dump...";
+#
+##creating import directory
+#mkdir $IMPORT_NAME;
+#
+##extracting to "import" directory
+#cd $IMPORT_NAME;
+#tar -xf ../$IMPORT_NAME.tar.gz
 
 
 echo "Overwriting site..."
@@ -56,12 +57,14 @@ $BASEDIR/$ServerSync_FrameworkModule/lib/overwrite-current-site.sh $DBNAME $FILE
 
 
 
+#we want no more cleanup, as we want the import dir to stay for subsequent syncs
 
-#Cleaning up
-#deleting import directory so a new can be created for next import
-cd ..;
-rm -rf $IMPORT_NAME;
 
-#moving import package to backups
-DATETIME=$(date +"%Y-%m-%d_%H-%M%Z");
-mv $IMPORT_NAME.tar.gz $BACKUP_NAME/$DATETIME-$IMPORT_NAME.tar.gz;
+##Cleaning up
+##deleting import directory so a new can be created for next import
+#cd ..;
+#rm -rf $IMPORT_NAME;
+#
+##moving import package to backups
+#DATETIME=$(date +"%Y-%m-%d_%H-%M%Z");
+#mv $IMPORT_NAME.tar.gz $BACKUP_NAME/$DATETIME-$IMPORT_NAME.tar.gz;
