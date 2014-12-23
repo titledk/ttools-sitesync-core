@@ -55,14 +55,15 @@ else
 	
 	else
 	
-		echo "not yet implemented...";
+		echo "Now connecting to $FROM to push to $TO";
 		
-		#if the mode is not local we'll ssh into the (TODO which?)
-		#server and run the sync script
+		SERVER_COMMANDS="$ENV_REPODIR/$ServerSync_FrameworkModule/lib/sync-current-site-with-env.sh to $TO"
+		
+		#echo $SERVER_COMMANDS;
+		
+		ssh $ENV_CUSTOM_SSHCONNECTIONSTR -t $SERVER_COMMANDS
 
 	fi
-	
-	
 	
 fi
 
