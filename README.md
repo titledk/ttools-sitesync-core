@@ -20,7 +20,8 @@ Under development:
 
 ## Installation
 
-Add the following to your `ttools-config.yml` (setting the framework module you're using):
+* run `git submodule add https://github.com/titledk/ttools-sitesync-core.git ttools/sitesync-core`
+* Add the following to your `ttools-config.yml` (setting the framework module you're using):
 
 	ServerSync:
 		FrameworkModule: 'ttools-sitesync-wordpress'
