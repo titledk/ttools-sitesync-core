@@ -14,7 +14,7 @@ Available modules:
 
 Under development:
 
-* **SilverStripe Site Sync**
+* [SilverStripe Site Sync](https://github.com/titledk/ttools-sitesync-silverstripe)
 
 
 
