@@ -2,7 +2,7 @@
 #Sitesync variables
 #Could be made configurable at a later stage 
 
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../../.. && pwd )";
 
 
 #Site sync specific variables

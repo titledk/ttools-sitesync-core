@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
-MODULEDIR="$BASEDIR/ttools-sitesync-core";
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../../.. && pwd )";
+MODULEDIR="$BASEDIR/ttools/sitesync-core";
 
 
 fileList="$(find $BASEDIR/temp/dumps/backups/* -maxdepth 0 -type d -not -name '.*')"

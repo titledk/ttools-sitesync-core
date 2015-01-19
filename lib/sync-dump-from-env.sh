@@ -3,12 +3,12 @@
 # - for import
 
 ENV=$1
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../../.. && pwd )";
 
 #sourcing variables
-source $BASEDIR/ttools-sitesync-core/lib/vars.sh;
+source $BASEDIR/ttools/sitesync-core/lib/vars.sh;
 
-ENVVARS="$BASEDIR/ttools-core/lib/vars-for-env.sh $ENV"
+ENVVARS="$BASEDIR/ttools/core/lib/vars-for-env.sh $ENV"
 eval `$ENVVARS`
 
 #https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps

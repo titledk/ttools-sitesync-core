@@ -26,18 +26,18 @@ if [[ "$TO" == "Live" ]]; then
 fi
 
 
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
-MODULEDIR="$BASEDIR/ttools-sitesync-wordpress";
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../../.. && pwd )";
+MODULEDIR="$BASEDIR/ttools/sitesync-wordpress";
 
 #getting configuration variables
-VARS="$BASEDIR/ttools-core/lib/vars.sh"
+VARS="$BASEDIR/ttools/core/lib/vars.sh"
 eval `$VARS`
 
 
 #getting environment variables
 #FROM will be the base
 ENV=$FROM;
-ENVVARS="$BASEDIR/ttools-core/lib/vars-for-env.sh $ENV"
+ENVVARS="$BASEDIR/ttools/core/lib/vars-for-env.sh $ENV"
 eval `$ENVVARS`
 
 

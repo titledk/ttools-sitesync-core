@@ -5,8 +5,8 @@
 #Can be called with an environment variable
 
 
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
-MODULEDIR="$BASEDIR/ttools-sitesync-core";
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../../.. && pwd )";
+MODULEDIR="$BASEDIR/ttools/sitesync-core";
 
 #sourcing variables
 source $MODULEDIR/lib/vars.sh;
@@ -16,7 +16,7 @@ IMPORT_PATH=$DUMP_PATH_DEFAULT;
 
 
 #getting configuration variables
-VARS="$BASEDIR/ttools-core/lib/vars.sh"
+VARS="$BASEDIR/ttools/core/lib/vars.sh"
 eval `$VARS`
 
 
@@ -25,7 +25,7 @@ ENV=LOCAL;
 if [ "${1}" ]; then
 	ENV=$1;
 fi
-ENVVARS="$BASEDIR/ttools-core/lib/vars-for-env.sh $ENV"
+ENVVARS="$BASEDIR/ttools/core/lib/vars-for-env.sh $ENV"
 eval `$ENVVARS`
 
 
