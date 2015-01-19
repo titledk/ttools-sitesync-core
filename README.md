@@ -24,5 +24,5 @@ Under development:
 * Add the following to your `ttools-config.yml` (setting the framework module you're using):
 
 	ServerSync:
-		FrameworkModule: 'ttools-sitesync-wordpress'
+		FrameworkModule: 'ttools/sitesync-silverstripe'
 

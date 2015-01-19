@@ -9,8 +9,8 @@ fi
 
 DUMPTYPE=$1
 
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )";
-MODULEDIR="$BASEDIR/ttools-sitesync-core";
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../../.. && pwd )";
+MODULEDIR="$BASEDIR/ttools/sitesync-core";
 
 #sourcing variables
 source $MODULEDIR/lib/vars.sh; #$DUMP_PATH_DEFAULT is defined here
@@ -19,7 +19,7 @@ DUMP_PATH=$DUMP_PATH_DEFAULT;
 
 
 #getting configuration variables
-VARS="$BASEDIR/ttools-core/lib/vars.sh"
+VARS="$BASEDIR/ttools/core/lib/vars.sh"
 eval `$VARS`
 
 
@@ -28,7 +28,7 @@ ENV=LOCAL;
 if [ "${2}" ]; then
 	ENV=$2;
 fi
-ENVVARS="$BASEDIR/ttools-core/lib/vars-for-env.sh $ENV"
+ENVVARS="$BASEDIR/ttools/core/lib/vars-for-env.sh $ENV"
 eval `$ENVVARS`
 
 
