@@ -67,10 +67,10 @@ $BASEDIR/$ServerSync_FrameworkModule/lib/dump-current-site.sh $DBNAME $FILESDIR 
 
 
 #specifics for backup type - only keep x backups
-#hardcoded to 16 for now, but this could be made configurable
+#hardcoded to 24 for now, but this could be made configurable
 
-KEEP=16;
-KEEP=6;
+KEEP=24;
+#KEEP=6;
 
 #regulating...
 KEEP=$(($KEEP+1));
