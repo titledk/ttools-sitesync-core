@@ -64,3 +64,21 @@ $BASEDIR/$ServerSync_FrameworkModule/lib/dump-current-site.sh $DBNAME $FILESDIR 
 #if [[ "$DUMPTYPE" == "backup" ]]; then
 #	rm -rf $DUMP_PATH/$DUMP_NAME
 #fi
+
+
+#specifics for backup type - only keep x backups
+#hardcoded to 16 for now, but this could be made configurable
+
+KEEP=16;
+KEEP=6;
+
+#regulating...
+KEEP=$(($KEEP+1));
+
+if [[ "$DUMPTYPE" == "backup" ]]; then
+
+	cd $DUMP_PATH;
+	#from http://stackoverflow.com/questions/6024088/linux-save-only-recent-10-folders-and-delete-the-rest
+	ls -dt */ | tail -n +$KEEP | xargs rm -rf
+
+fi
