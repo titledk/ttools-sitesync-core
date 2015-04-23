@@ -67,10 +67,14 @@ $BASEDIR/$Sitesync_FrameworkModule/lib/dump-current-site.sh $DBNAME $FILESDIR $E
 
 
 #specifics for backup type - only keep x backups
-#hardcoded to 24 for now, but this could be made configurable
+#default is 6 but can be configured through config.yml
 
-KEEP=24;
-#KEEP=6;
+KEEP=6;
+
+if [ "$Sitesync_DumpBackupKeep" ]; then
+	KEEP=$Sitesync_DumpBackupKeep
+fi
+
 
 #regulating...
 KEEP=$(($KEEP+1));
