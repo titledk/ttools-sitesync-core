@@ -49,7 +49,7 @@ DBNAME="$DUMP_PATH/$DUMP_NAME/$DUMP_DBNAME";
 FILESDIR="$DUMP_PATH/$DUMP_NAME/$DUMP_FILESDIR";
 
 #This is handled by each framework module individually
-$BASEDIR/$ServerSync_FrameworkModule/lib/dump-current-site.sh $DBNAME $FILESDIR $ENV
+$BASEDIR/$Sitesync_FrameworkModule/lib/dump-current-site.sh $DBNAME $FILESDIR $ENV
 
 
 #dump compression has been taken out for now

@@ -53,7 +53,7 @@ DBNAME="$IMPORT_PATH/$IMPORT_NAME/$DUMP_DBNAME";
 FILESDIR="$IMPORT_PATH/$IMPORT_NAME/$DUMP_FILESDIR";
 
 #This is handled by each framework module individually
-$BASEDIR/$ServerSync_FrameworkModule/lib/overwrite-current-site.sh $DBNAME $FILESDIR $ENV
+$BASEDIR/$Sitesync_FrameworkModule/lib/overwrite-current-site.sh $DBNAME $FILESDIR $ENV
 
 
 

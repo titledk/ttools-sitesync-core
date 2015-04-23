@@ -45,19 +45,19 @@ eval `$ENVVARS`
 if [[ "$FROM" == "Local" ]]; then
 
 	#this is the basic local sync, which is implemented by each framework specific module
-	$BASEDIR/$ServerSync_FrameworkModule/lib/sync-current-site-with-env.sh to $TO
+	$BASEDIR/$Sitesync_FrameworkModule/lib/sync-current-site-with-env.sh to $TO
 	
 else
 
 	if [[ "$TO" == "Local" ]]; then
 		#this is the basic local sync, which is implemented by each framework specific module
-		$BASEDIR/$ServerSync_FrameworkModule/lib/sync-current-site-with-env.sh from $FROM
+		$BASEDIR/$Sitesync_FrameworkModule/lib/sync-current-site-with-env.sh from $FROM
 	
 	else
 	
 		echo "Now connecting to $FROM to push to $TO";
 		
-		SERVER_COMMANDS="$ENV_REPODIR/$ServerSync_FrameworkModule/lib/sync-current-site-with-env.sh to $TO"
+		SERVER_COMMANDS="$ENV_REPODIR/$Sitesync_FrameworkModule/lib/sync-current-site-with-env.sh to $TO"
 		
 		#echo $SERVER_COMMANDS;
 		
