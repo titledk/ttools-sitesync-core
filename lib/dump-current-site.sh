@@ -35,6 +35,15 @@ eval `$ENVVARS`
 #specifics for backup type
 if [[ "$DUMPTYPE" == "backup" ]]; then
 	DUMP_PATH="$BASEDIR/temp/dumps/$BACKUP_NAME";
+
+	#if a backup path has been set for the environment, use that instead
+	backupPathToEval="Environments_"$ENV"_Sitesync_BackupPath"
+	if [ "${!backupPathToEval}" != "" ]; then
+		DUMP_PATH="${!backupPathToEval}";
+		mkdir -p $DUMP_PATH
+	fi
+
+
 	DUMP_NAME=$(date +"%Y-%m-%d_%H-%M%Z");
 fi
 
@@ -42,8 +51,7 @@ fi
 #making sure dump path exists
 mkdir -p $DUMP_PATH/$DUMP_NAME;
 
-
-echo "Dumping db and assets...";
+echo "Dumping db and assets to $DUMP_PATH/$DUMP_NAME";
 
 DBNAME="$DUMP_PATH/$DUMP_NAME/$DUMP_DBNAME";
 FILESDIR="$DUMP_PATH/$DUMP_NAME/$DUMP_FILESDIR";

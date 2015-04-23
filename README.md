@@ -26,3 +26,22 @@ Under development:
 	Sitesync:
 		FrameworkModule: 'ttools/sitesync-silverstripe'
 
+
+## Configuration options
+
+Configuration options have been added only as needed this far.
+
+### Environment specific
+
+    Environments:
+      Live:
+        Sitesync:
+          BackupPath: "/backups/mysite"
+
+### Global
+
+TODO: it would make more sense for the keep option to also be environment specific
+
+    Sitesync:
+      FrameworkModule: 'ttools/sitesync-silverstripe'
+      DumpBackupKeep: 2
