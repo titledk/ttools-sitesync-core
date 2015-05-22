@@ -1,5 +1,5 @@
 #!/bin/bash
-#This script dumps the current site to temp/dumps,
+#This script dumps the current site
 
 #You need to supply either 'dump' or 'backup' as type
 if [ -z "${1}" ]; then

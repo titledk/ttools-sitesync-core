@@ -1,8 +1,9 @@
 # Terminal Tools Site Sync Core
 
-Core for syncing site assets and databases between local development 
-environments to/from (or between) test/stage/live environments
-with [Terminal Tools](https://github.com/titledk/ttools-core)
+Core for
+
+* syncing site assets and databases between environments
+* dumping a site for backups - can be used together with [ttools-backups](https://github.com/titledk/ttools-backups)
 
 You'll need to add (or write) an additional framework specific module
 to make this work with your framework.
@@ -10,10 +11,6 @@ to make this work with your framework.
 Available modules:
 
 * [Wordpress Site Sync](https://github.com/CPHCloud/ttools-sitesync-wordpress)
-
-
-Under development:
-
 * [SilverStripe Site Sync](https://github.com/titledk/ttools-sitesync-silverstripe)
 
 
