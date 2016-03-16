@@ -43,8 +43,15 @@ if [[ "$DUMPTYPE" == "backup" ]]; then
 		mkdir -p $DUMP_PATH
 	fi
 
-
 	DUMP_NAME=$(date +"%Y-%m-%d_%H-%M%Z");
+
+	#dump name can be called with a third backup name parameter
+	#in this case any above settings are overridden
+	if [ "${3}" ]; then
+		DUMP_PATH="$BASEDIR/temp/dumps/$BACKUP_NAMED_NAME";
+		DUMP_NAME=$(date +"%Y-%m-%d_")$3;
+	fi
+
 fi
 
 
@@ -77,20 +84,26 @@ $BASEDIR/$Sitesync_FrameworkModule/lib/dump-current-site.sh $DBNAME $FILESDIR $E
 #specifics for backup type - only keep x backups
 #default is 6 but can be configured through config.yml
 
-KEEP=6;
+KEEP=$BACKUP_KEEP_DEFAULT;
 
 if [ "$Sitesync_DumpBackupKeep" ]; then
 	KEEP=$Sitesync_DumpBackupKeep
 fi
 
-
-#regulating...
-KEEP=$(($KEEP+1));
-
 if [[ "$DUMPTYPE" == "backup" ]]; then
 
-	cd $DUMP_PATH;
-	#from http://stackoverflow.com/questions/6024088/linux-save-only-recent-10-folders-and-delete-the-rest
-	ls -dt */ | tail -n +$KEEP | xargs rm -rf
+	#only clean up if the type is backup and no name parameter has been submitted
+	if [ -z "${3}" ]; then
+		echo ""
+		echo "Keeping $KEEP latest backups"
+		echo ""
+
+		#regulating...
+		KEEP=$(($KEEP+1));
+
+		cd $DUMP_PATH;
+		#from http://stackoverflow.com/questions/6024088/linux-save-only-recent-10-folders-and-delete-the-rest
+		ls -dt */ | tail -n +$KEEP | xargs rm -rf
+	fi
 
 fi
