@@ -27,7 +27,6 @@ fi
 
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../../.. && pwd )";
-MODULEDIR="$BASEDIR/ttools/sitesync-wordpress";
 
 #getting configuration variables
 VARS="$BASEDIR/ttools/core/lib/vars.sh"
