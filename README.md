@@ -42,3 +42,5 @@ TODO: it would make more sense for the keep option to also be environment specif
     Sitesync:
       FrameworkModule: 'ttools/sitesync-silverstripe'
       DumpBackupKeep: 2
+      #don't run backups before overwriting a site (on large sites this can become tedious)
+      SkipBackups: true

@@ -1,7 +1,7 @@
 #!/bin/bash
 #This script overwrites the current site 
 # - from the import directory - which should have been uploaded
-# - but not before taking a backup
+# - but not before taking a backup (can be turned off)
 #Can be called with an environment variable
 
 
@@ -29,10 +29,13 @@ ENVVARS="$BASEDIR/ttools/core/lib/vars-for-env.sh $ENV"
 eval `$ENVVARS`
 
 
-echo "Initiating backup before overwriting...";
-$MODULEDIR/lib/dump-current-site.sh backup $ENV;
-
-
+#backup before overwriting
+if [[ "$Sitesync_SkipBackups" == "true" ]]; then
+	echo "Skipping backup (as per configuration)"
+else
+	echo "Initiating backup before overwriting...";
+	$MODULEDIR/lib/dump-current-site.sh backup $ENV;
+fi
 
 cd $IMPORT_PATH;
 
