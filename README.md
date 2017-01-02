@@ -37,10 +37,16 @@ Configuration options have been added only as needed this far.
 
 ### Global
 
-TODO: it would make more sense for the keep option to also be environment specific
-
     Sitesync:
       FrameworkModule: 'ttools/sitesync-silverstripe'
       DumpBackupKeep: 2
       #don't run backups before overwriting a site (on large sites this can become tedious)
       SkipBackups: true
+
+These settings can also be environment specific, in that case create a `config_local.yml` file which you'll place next to the `config.yml` file, it could e.g. look like this:
+
+```
+Sitesync:
+  SkipBackups: true
+```
+
