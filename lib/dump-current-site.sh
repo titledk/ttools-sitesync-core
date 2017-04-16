@@ -1,5 +1,11 @@
 #!/bin/bash
-#This script dumps the current site
+# This script dumps the current site
+# Can be called with the following arguments:
+# 1. Type: dump/backup - is this a dump for sync, or a backup
+# 2. Environment - if this is called on a server we might need to add the environment name, as specific paths etc. might
+# need to be taken into account there - use "LOCAL" for local/default environment
+# 3. Dump name - dumps can be named - a named backup will never be automatically deleted - supply "false" for default
+# 4. Skip: skipfiles - if the fourth parameter supplied is called "skipfiles", then files will be skipped in the dump
 
 #You need to supply either 'dump' or 'backup' as type
 if [ -z "${1}" ]; then
@@ -47,9 +53,11 @@ if [[ "$DUMPTYPE" == "backup" ]]; then
 
 	#dump name can be called with a third backup name parameter
 	#in this case any above settings are overridden
-	if [ "${3}" ]; then
-		DUMP_PATH="$BASEDIR/temp/dumps/$BACKUP_NAMED_NAME";
-		DUMP_NAME=$(date +"%Y-%m-%d_")$3;
+	if [[ "${3}" ]]; then
+		if [[ "${3}" != "false" ]]; then
+			DUMP_PATH="$BASEDIR/temp/dumps/$BACKUP_NAMED_NAME";
+			DUMP_NAME=$(date +"%Y-%m-%d_")$3;
+		fi
 	fi
 
 fi
@@ -62,6 +70,11 @@ echo "Dumping db and assets to $DUMP_PATH/$DUMP_NAME";
 
 DBNAME="$DUMP_PATH/$DUMP_NAME/$DUMP_DBNAME";
 FILESDIR="$DUMP_PATH/$DUMP_NAME/$DUMP_FILESDIR";
+
+# skipping files if requested
+if [[ "${4}" == "skipfiles" ]]; then
+	FILESDIR='false'
+fi
 
 #This is handled by each framework module individually
 $BASEDIR/$Sitesync_FrameworkModule/lib/dump-current-site.sh $DBNAME $FILESDIR $ENV
